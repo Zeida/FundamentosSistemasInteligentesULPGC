@@ -753,7 +753,13 @@ class BBStack(Queue):
         self.A = sorted(self.A, key= lambda cost: cost.path_cost)
 
     def pop(self):
-        return self.A.pop(0)
+        e = self.A[self.start]
+        self.start += 1
+        if self.start > len(self.A) / 2:
+            self.A = self.A[self.start:]
+            self.start = 0
+        return e
+
 
 class BBStackH(Queue):
     def __init__(self,problem):
